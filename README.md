@@ -98,6 +98,8 @@ Here’s a deeper look at what I bring to the table:
 ### **Material Recommendations**
    I recommend the best resources for your learning, from research papers to online courses, ensuring you’re always up-to-date in your field.
 
+### ** User dashboard**
+    I will provide a dashboard that highlights the performance of the users in the interviews, warmup sessions, etc.
 ---
 
 ## **How Does It All Work?**
@@ -140,10 +142,12 @@ Under the expert guidance of **Dr. Apash Roy**, these creators ensured I am your
 
 While I’m already equipped to help you ace your career journey, here’s what’s coming next:
 
-- **Dashboard Integration**: Soon, I’ll offer detailed insights into your progress with visual analytics.
 - **Speech-Based Interviews**: I’m working on enhancing my interview bot with **speech capabilities** for a fully immersive experience.
 - **Expanded Course Recommendations**: Expect more tailored learning opportunities as I continue to grow my knowledge base.
 
+# Report 
+
+Find our report here : https://drive.google.com/file/d/1aiKSewtR3wimCefeQiNNXZMGKoYqRzQL/view?usp=drive_link
 ---
 
 Let’s begin our journey together, shall we? Conversations will guide us to your career success, one chat at a time. 💬🚀
