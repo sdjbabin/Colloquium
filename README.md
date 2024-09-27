@@ -1,7 +1,8 @@
 
 
 # **Colloquium: Your AI-Powered Career Guide** 🤖
-![Uploading logo2.png…]()
+![logo2](https://github.com/user-attachments/assets/904edd8c-48fb-4a0f-90b3-34aac06c138c)
+
 
 ---
 
