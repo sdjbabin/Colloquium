@@ -1,7 +1,7 @@
 
 
 # **Colloquium: Your AI-Powered Career Guide** 🤖
-![bot-dancing-unscreen](https://github.com/user-attachments/assets/741b4044-82cf-4bbb-bd85-0ef064dd6b67)
+![Uploading logo2.png…]()
 
 ---
 
