@@ -18,16 +18,19 @@ Imagine this: You’re standing at the crossroads of your professional life, uns
 
 I am no ordinary career bot. I am designed to provide a seamless, personalized career guidance experience through **AI-driven insights, mock interviews, and real-time learning recommendations**. Here’s a breakdown of what I can do for you:
 
-### **1. Personalized Career Guidance**
+### **1. Personalized Career Guidance**🎯
    - I tailor my advice specifically for you based on your profile, preferences, and goals. This isn’t a one-size-fits-all approach; it’s a journey we’ll embark on together, one step at a time.
 
-### **2. AI-Powered Mock Interviews**
+### **2. AI-Powered Mock Interviews**🗣️
    - Preparing for a big interview? Don’t worry—I’ve got you covered! My mock interview module simulates a real interview experience, generating questions based on your resume and field. I also provide constructive feedback and scores so you can track your progress.
 
-### **3. Research Paper & Course Recommendations**
+### **3. Research Paper & Course Recommendations** 📚
    - I help you stay updated with the latest research and learning opportunities. Whether you’re a student or a professional, my machine learning algorithms will suggest relevant research papers and online courses to sharpen your skills.
 
-### **4. Multimodal Chat Support** 
+### **4. Language Learning Support 🌍🗣️
+Want to learn a new language? I’ll guide you step-by-step, providing translation and practice opportunities so you can build your communication skills for the global job market.
+
+### **5. Multimodal Chat Support** 💬🗣️
    - Not a fan of typing? No problem! Talk to me using **text or voice** in five different languages. I am designed to understand you, regardless of your communication style.
 
 ## Additional Modules
