@@ -1,0 +1,6 @@
+gradio==3.28.0
+transformers==4.33.0
+torch==2.0.1
+langid==1.1.6
+numpy<2
+accelerate

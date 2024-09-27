@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baskervville+SC&display=swap" rel="stylesheet">
+    <title>Interview Bot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            background-size: cover;
+            background-image: url(white.jpg);
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            color: white;
+        }
+
+        .container1 {
+            background-color: rgb(255, 255, 255);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            width: 1000px;
+            margin-right: 20%;
+            z-index: 999;
+            margin-top: 7%;
+            display: none; /* Initially hidden */
+        }
+
+        .countdown-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4em;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        .countdown-text {
+            font-family:  "Baskervville SC", serif;;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #777;
+        }
+
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            font-size: 1em;
+            color: #555;
+        }
+
+        .record-button {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .record-button:hover {
+            background-color: #218838;
+        }
+
+        .recording {
+            color: red;
+            font-weight: bold;
+        }
+
+        #categoryTitle{
+            size: 10 px;
+            background-color: #ef74106d; /* Light grey background */
+    padding: 20px;             /* Space inside the block */
+    /* border: 2px solid #ccc;     */
+    border-radius: 15px;        /* Rounded corners */
+    display: inline-block;
+    font-size: 80%;     
+}
+
+#questionText{
+    font-style: italic;          
+    font-size: 250%;
+    color: black;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+.pattern{
+    background:url(https://plus.unsplash.com/premium_photo-1661955917112-32d44c5c0f78?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8b3JhbmdlJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+    font-size: 80px;
+	text-align: center;
+	font-family: 'Righteous', sans-serif;
+	letter-spacing: 12px;
+	font-weight: bolder;
+    /* z-index: -999; */
+    margin-left: 20%;
+    margin-top: -50%;
+    margin-right: -20%;
+}
+
+
+
+    </style>
+</head>
+
+<body>
+
+    <div class="countdown-overlay" id="countdownOverlay">
+        <div id="countdownText" class="countdown-text">Starting in 5</div>
+    </div>
+
+    
+<header id="header" class="menu-container">
+
+    <!--   Logo -->
+    <div class="logo-box">
+      <!-- <svg id="header-img" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 477.867 477.867" style="enable-background:new 0 0 477.867 477.867;" xml:space="preserve"><g><g>
+      <g>
+          <path d="M375.467,136.533c-53.333,0-110.933,51.661-136.533,77.534c-25.6-25.873-83.2-77.534-136.533-77.534    c-64.119,0-102.4,38.281-102.4,102.4s38.281,102.4,102.4,102.4c53.333,0,110.933-51.661,136.533-77.534    c25.6,25.873,83.2,77.534,136.533,77.534c64.12,0,102.4-38.281,102.4-102.4S439.586,136.533,375.467,136.533z M102.4,307.2    c-45.295,0-68.267-22.972-68.267-68.267s22.972-68.267,68.267-68.267c37.547,0,87.381,42.308,113.118,68.267    C189.833,264.926,140.1,307.2,102.4,307.2z M375.467,307.2c-37.547,0-87.381-42.308-113.118-68.267    c25.6-25.975,75.418-68.267,113.118-68.267c45.295,0,68.267,22.972,68.267,68.267S420.762,307.2,375.467,307.2z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#EE3E01"/>
+      </g>
+  </g></g> </svg> -->
+
+  <img src="logo2.png" alt="" srcset="" style="width: 17%; margin-left: -90%;margin-bottom: -5%;">
+    </div>
+    <!--   Logo -->
+  
+    <!--   navbar -->
+    <nav id="nav-bar" style="margin-left: -50%;width: 100%;">
+      <input class="menu-btn" type="checkbox" id="menu-btn" />
+      <label class="menu-icon" for="menu-btn"><span class="nav-icon"></span></label>
+      <div class="container blue circleBehind" style="width: 100%;box-shadow: none;">
+        <a href="#title">HOME</a>
+        <a href="#see">VIDEO</a>
+        <a href="#slide1">ABOUT</a>
+        <a href="#slide2">FEATURES</a>
+        <a href="#slide3">PRICING</a>
+        <a href="contact.html">CONTACT US</a>
+        <a href="admin.html">DASHBOARD</a>
+        <a href="login.html">LOG OUT</a>
+        <!-- <video src="/frontend-main/Responsive_Admin_Dashboard/bot gif.mp4" autoplay muted loop  style="width: 10%;margin-left: 95%;margin-top: -4%;"> -->
+
+      </div>
+    </nav>
+    <!--   navbar -->
+  </header>
+
+
+    <div>
+    <h1 class="pattern">WARMUP</h1></div>
+  <!-- <img src="logo2.png" alt="" srcset="" style="width: 100px;z-index: 5;margin-top: -30%;margin-left: -15%;"> -->
+        <video muted loop style="margin-right:3%;width: 30%;margin-left: -20%;" id="vid">
+        <source src="bot video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="container1">
+        <h1 id="categoryTitle" style="color: red;"> Interview Questions</h1>
+        <p id="questionText">Please click 'Next Question' to start.</p>
+
+        <!-- Form starts here -->
+        <form id="interviewForm" onsubmit="submitAnswer(event)">
+            <button type="button" onclick="nextQuestion()">Next Question</button>
+
+            <button type="button" class="record-button" id="startRecord" onclick="startRecording()">Start Recording Answer</button>
+            <button type="button" class="record-button" id="stopRecord" onclick="stopRecording()" style="display: none;">Stop Recording</button>
+
+            <textarea id="answerText" name="answer" placeholder="Your answer will appear here..." readonly></textarea>
+
+            <button type="submit">Submit Answer</button>
+        </form>
+        <!-- Form ends here -->
+
+        <div class="feedback" id="feedback"></div>
+    </div>
+
+    <script>
+        const questionBank = {
+            "About Yourself": [
+                "Can you tell me about yourself?",
+                "What are your strengths and weaknesses?",
+                "Where do you see yourself in five years?",
+                "What motivates you to succeed?",
+                "How do you handle failure?"
+            ],
+            "Critical Thinking": [
+                "Can you describe a situation where you had to make a difficult decision?",
+                "How do you approach solving complex problems?",
+                "Give an example of a time when you identified a major issue in a project.",
+                "How do you evaluate the success of a decision you made?",
+                "What steps do you take to ensure you consider all aspects of a problem?"
+            ],
+            "Guesstimates": [
+                "How many piano tuners are there in New York City?",
+                "Estimate the number of windows in the city of Chicago.",
+                "How many tennis balls can fit in a Boeing 747?",
+                "Estimate the annual revenue of a local coffee shop.",
+                "How would you estimate the number of cars crossing a bridge daily?"
+            ],
+            "Soft Skills": [
+                "How do you handle working with a difficult colleague?",
+                "Can you give an example of a time you resolved a conflict at work?",
+                "Describe how you communicate complex ideas to a non-expert.",
+                "How do you adapt to changes in the workplace?",
+                "What is your approach to teamwork?"
+            ]
+        };
+
+        const bufferPhrases = [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ];
+
+        let recognition;
+        let isRecording = false;
+        let categories = Object.keys(questionBank);
+        let currentCategoryIndex = 0;
+        let currentQuestions = [];
+        let questionIndex = 0;
+        
+
+        function initQuestions() {
+            currentCategoryIndex = -1;
+            loadCategoryQuestions();
+            
+        }
+
+        function loadCategoryQuestions() {
+            if (currentCategoryIndex < categories.length) {
+                const category = categories[++currentCategoryIndex];
+                document.getElementById('categoryTitle').innerText = category;
+                currentQuestions = getShuffledQuestions(questionBank[category]);
+                questionIndex = 0;
+                setTimeout(nextQuestion, 5000); // Delay of 5 seconds before starting to read the first question
+
+            } else {
+                document.getElementById('questionText').innerText = "All categories completed. Well done!";
+            }
+        }
+
+        function getShuffledQuestions(questions) {
+            const firstQuestion = "Can you tell me about yourself?";
+            const filteredQuestions = questions.filter(q => q !== firstQuestion);
+            const shuffledQuestions = shuffleArray(filteredQuestions);
+            return [firstQuestion, ...shuffledQuestions];
+        }
+
+        function shuffleArray(array) {
+            return array.sort(() => Math.random() - 0.5);
+        }
+
+        function getRandomBufferPhrase() {
+            const randomIndex = Math.floor(Math.random() * bufferPhrases.length);
+            return bufferPhrases[randomIndex];
+        }
+
+        let startTime;
+
+function nextQuestion() {
+    if (questionIndex < currentQuestions.length) {
+        const question = currentQuestions[questionIndex];
+        const bufferPhrase = getRandomBufferPhrase();
+        document.getElementById('questionText').innerText = `${bufferPhrase} ${question}`;
+        
+        // Record the start time when the question is displayed
+        startTime = new Date().getTime();
+
+        questionIndex++;
+        speakQuestion(`${bufferPhrase} ${question}`);
+    } else {
+        currentCategoryIndex++;
+        loadCategoryQuestions();
+    }
+}
+
+function submitAnswer(event) {
+    event.preventDefault();
+    const category = document.getElementById('categoryTitle').innerText;
+    const question = document.getElementById('questionText').innerText;
+    const answer = document.getElementById('answerText').value;
+    
+    // Record the end time when the user submits the answer
+    const endTime = new Date().getTime();
+    
+    // Calculate the time taken in seconds
+    const timeTaken = (endTime - startTime) / 1000;
+
+    fetch('/submit-answer', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            category: category,
+            question: question,
+            answer: answer,
+            timeTaken: timeTaken // Send the time taken to the backend
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        document.getElementById('feedback').innerText = 'Answer submitted successfully!';
+        document.getElementById('answerText').value = '';
+        nextQuestion();
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        document.getElementById('feedback').innerText = 'Error submitting answer. Please try again.';
+    });
+}
+
+        function speakQuestion(text) {
+            const video = document.getElementById('vid');
+            const speech = new SpeechSynthesisUtterance(text);
+            speech.lang = 'en-US';
+
+            speech.onstart = function () {
+                video.play();
+            };
+
+            speech.onend = function () {
+                video.pause();
+            };
+
+            window.speechSynthesis.speak(speech);
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            startCountdown();
+        });
+
+        function startCountdown() {
+            const countdownElement = document.getElementById('countdownText');
+            let timeLeft = 5; // Countdown starts from 5 seconds
+
+            const countdownInterval = setInterval(() => {
+                countdownElement.textContent = `Starting in ${timeLeft}`;
+                timeLeft--;
+
+                if (timeLeft < 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById('countdownOverlay').style.display = 'none';
+                    document.querySelector('.container1').style.display = 'block';
+                }
+            }, 1000); // Update every second
+        }
+
+
+        function startRecording() {
+            if (!isRecording) {
+                recognition = new webkitSpeechRecognition();
+                recognition.lang = 'en-US';
+                recognition.interimResults = false;
+                recognition.maxAlternatives = 1;
+                recognition.continuous = true;
+
+                recognition.onresult = function (event) {
+                    const speechResult = event.results[0][0].transcript;
+                    document.getElementById('answerText').value = speechResult;
+                };
+
+                recognition.onend = function () {
+                    isRecording = false;
+                    toggleRecordButtons();
+                };
+
+                recognition.onerror = function (event) {
+                    console.error(event.error);
+                    isRecording = false;
+                    toggleRecordButtons();
+                };
+
+                recognition.start();
+                isRecording = true;
+                toggleRecordButtons();
+            }
+        }
+
+        function stopRecording() {
+            if (isRecording) {
+                recognition.stop();
+                isRecording = false;
+                toggleRecordButtons();
+            }
+        }
+
+        function toggleRecordButtons() {
+            document.getElementById('startRecord').style.display = isRecording ? 'none' : 'inline-block';
+            document.getElementById('stopRecord').style.display = isRecording ? 'inline-block' : 'none';
+        }
+
+        // function submitAnswer(event) {
+        //     event.preventDefault();
+        //     const category = document.getElementById('categoryTitle').innerText;
+        //     const question = document.getElementById('questionText').innerText;
+        //     const answer = document.getElementById('answerText').value;
+
+        //     fetch('/submit-answer', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify({
+        //             category: category,
+        //             question: question,
+        //             answer: answer
+        //         }),
+        //     })
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             console.log('Success:', data);
+        //             document.getElementById('feedback').innerText = 'Answer submitted successfully!';
+        //             document.getElementById('answerText').value = '';
+        //             nextQuestion();
+        //         })
+        //         .catch((error) => {
+        //             console.error('Error:', error);
+        //             document.getElementById('feedback').innerText = 'Error submitting answer. Please try again.';
+        //         });
+        // }
+
+        // Initialize the first set of questions when the page loads
+        window.onload = initQuestions;
+
+    </script>
+</body>
+
+</html>

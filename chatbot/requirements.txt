@@ -1,0 +1,8 @@
+torch>=2.0
+transformers>=4.35.0
+gradio>=4.27.0
+peft
+librosa
+pyloudnorm
+noisereduce
+soundfile

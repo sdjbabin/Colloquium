@@ -1,0 +1,168 @@
+import gradio as gr
+import pdfplumber
+import docx2txt
+import os
+import re
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
+
+# Define the model and tokenizer
+f=0
+model_name = "microsoft/Phi-3.5-mini-instruct"
+model = AutoModelForCausalLM.from_pretrained(
+    model_name,
+    device_map="auto",
+    torch_dtype=torch.float32,
+    trust_remote_code=True,
+)
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+# Create a text generation pipeline
+pipe = pipeline(
+    "text-generation",
+    model=model,
+    tokenizer=tokenizer,
+)
+
+def extract_text_from_pdf(pdf_path):
+    """Extract text from a PDF file using pdfplumber."""
+    text = ""
+    with pdfplumber.open(pdf_path) as pdf:
+        for page in pdf.pages:
+            text += page.extract_text() + "\n"
+    return text
+
+def extract_text_from_docx(docx_path):
+    """Extract text from a DOCX file using docx2txt."""
+    return docx2txt.process(docx_path)
+
+def extract_resume_info(text):
+    """Extract key information from the resume text."""
+    text = text.lower()
+    headers = {
+        'name': 'NAME',
+        'skills': 'SKILLS',
+        'experience': 'EXPERIENCE',
+        'education': 'EDUCATION'
+    }
+    first_line = text.split('\n', 1)[0].strip()
+    name_match = re.match(r'^.*\s*name\s*[:\-]?\s*(.*)', first_line, re.IGNORECASE)
+    name = name_match.group(1).strip() if name_match else first_line
+    for key, value in headers.items():
+        text = re.sub(rf'\b{key}\b', value, text, flags=re.IGNORECASE)
+    def extract_section(header):
+        pattern = rf'\b{header}\b\s*[:\-]?\s*(.*?)(?=\n[A-Z]|$)'
+        match = re.search(pattern, text, re.DOTALL)
+        return match.group(1).strip() if match else 'Not Found'
+    skills = extract_section('SKILLS')
+    experience = extract_section('EXPERIENCE')
+    education = extract_section('EDUCATION')
+
+    # Ensure experience is treated as an integer for comparison
+    experience_present = 1 if experience != 'Not Found' else 0
+    return name, skills, experience_present, education
+
+def generate_response(prompt):
+    """Generate a response using the language model."""
+    full_prompt = prompt
+    generation_args = {
+        "max_new_tokens": 90 ,
+        "return_full_text": True,
+        "temperature": 0.7,
+        "do_sample": True,
+    }
+    output = pipe(full_prompt, **generation_args)
+    return output[0]['generated_text'].strip()
+
+def process_resume(file_path):
+    """Process the resume to extract text and key information."""
+    file_extension = os.path.splitext(file_path)[1].lower()
+    if file_extension == '.pdf':
+        extracted_text = extract_text_from_pdf(file_path)
+    elif file_extension == '.docx':
+        extracted_text = extract_text_from_docx(file_path)
+    else:
+        raise ValueError("Unsupported file format. Please upload a PDF or DOCX file.")
+    return extracted_text
+
+def run_interview(name, skills, experience, user_response=None, user_response2=None):
+    """Conduct an interview based on the extracted resume data."""
+    questions_and_answers = []
+    model_responses = []
+    
+    if (experience) and (skills):
+        print("dehukeche 1")
+        # Ask the first question
+        experience_question = "Can you describe a challenging project where you applied your experience?"
+        questions_and_answers.append({"Question": experience_question, "User Answer": user_response})
+
+        # Generate the second question based on the user's first response
+        if user_response:  # Only generate a follow-up question if the user has responded
+            print("dhukeche 2")
+            prompt = f"You are a job interviewer. Please generate only a follow-up question without any additional text or answer based on this : {user_response}"
+            follow_up_question = generate_response(prompt)
+            questions_and_answers.append({"Question": follow_up_question, "User Answer": user_response2})
+
+            # After the second response, add "Ok, got it..."
+        if user_response2:
+          print("ok i am not moving on")
+          questions_and_answers.append({"Question": "Ok, got it...", "User Answer": ""})
+          return questions_and_answers, ""
+
+    return questions_and_answers, ""
+    
+
+              
+
+          
+
+
+def upload_resume(file):
+    """Upload and process the resume to extract key information."""
+    resume_text = process_resume(file.name)
+    name, skills, experience, education = extract_resume_info(resume_text)
+    return name, skills, experience, education, resume_text
+
+def interview_interface(name, skills, experience, user_response=None):
+    questions_and_answers,model_responses = run_interview(name, skills, experience, user_response)
+
+    # Convert to list of lists (or tuples) for DataFrame compatibility
+    questions_answers_df = [[q["Question"], q["User Answer"]] for q in questions_and_answers]
+    model_responses_df = [[m["Question"], m["Model Response"]] for m in model_responses]
+
+    # Return the DataFrame outputs and reset the user response input
+    return questions_answers_df, model_responses_df, ""
+
+def start_interview_from_file(file):
+    """Extract resume info and automatically start the interview."""
+    name, skills, experience, education, _ = upload_resume(file)
+    return interview_interface(name, skills, experience)
+
+with gr.Blocks() as demo:
+    with gr.Tabs():
+        with gr.TabItem("Upload Resume"):
+            resume_file = gr.File(label="Upload your resume (PDF or DOCX):")
+            name_output = gr.Textbox(label="Name", interactive=False)
+            skills_output = gr.Textbox(label="Skills", interactive=False)
+            experience_output = gr.Textbox(label="Experience", interactive=False)
+            education_output = gr.Textbox(label="Education", interactive=False)
+            process_button = gr.Button("Process Resume")
+            process_button.click(upload_resume, inputs=resume_file, outputs=[name_output, skills_output, experience_output, education_output])
+
+        with gr.TabItem("Interview"):
+            questions_answers_output = gr.DataFrame(label="Questions and Answers", headers=["Question", "Answer"])
+            model_responses_output = gr.DataFrame(label="Model's Responses", headers=["Question", "Model Response"])
+
+            user_response_input = gr.Textbox(label="Your Response")
+            submit_response_button = gr.Button("Submit Response")
+
+            # Automatically start interview when the resume is processed
+            resume_file.change(start_interview_from_file, inputs=resume_file, outputs=[questions_answers_output, model_responses_output])
+
+            # Capture user response, generate model response, and reset the input
+            submit_response_button.click(
+                interview_interface,
+                inputs=[name_output, skills_output, experience_output, user_response_input],
+                outputs=[questions_answers_output, model_responses_output, user_response_input]
+            )
+
+demo.launch(debug=True)

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Bot</title>
+    <style>
+       body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#background-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    object-fit: cover;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    color: white; /* Adjust text color for visibility */
+}
+
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            width: 500px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #777;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            font-size: 1em;
+            color: #555;
+        }
+
+        .record-button {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .record-button:hover {
+            background-color: #218838;
+        }
+
+        .recording {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <video autoplay muted loop id="background-video">
+        <source src="https://res.cloudinary.com/dye74kvqk/video/upload/v1724334056/y2mate.com_-_Why_an_Animated_Chatbot_Gets_More_Engagement_v720P_ddkldi.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="container">
+        <h1>Interview Bot</h1>
+        <p>Select a job role to practice:</p>
+        <select id="jobRole" onchange="initQuestions()">
+            <option value="UX Design">UX Design</option>
+            <option value="Data Analytics">Data Analytics</option>
+            <option value="Project Management">Project Management</option>
+        </select>
+
+        <p id="questionText"></p>
+
+        <button onclick="nextQuestion()">Next Question</button>
+
+        <button class="record-button" id="startRecord" onclick="startRecording()">Start Recording Answer</button>
+        <button class="record-button" id="stopRecord" onclick="stopRecording()" style="display: none;">Stop Recording</button>
+
+        <p id="answerText"></p>
+
+        <button onclick="submitAnswer()">Submit Answer</button>
+
+        <div class="feedback" id="feedback"></div>
+    </div>
+
+    <script>
+        const questionBank = {
+            "UX Design": [
+                "What is your process for creating user-centered designs?",
+                "How do you incorporate user feedback into your designs?",
+                "Can you describe a time you solved a design problem creatively?",
+                "How do you balance aesthetics with usability in your designs?",
+                "What tools do you use for UX research?",
+                "How do you stay updated on UX design trends?",
+                "Explain the importance of wireframing in your design process.",
+                "Describe a project where your UX design improved user satisfaction.",
+                "How do you prioritize user needs in a design project?",
+                "How do you approach usability testing?",
+                "Tell me about a time you had to advocate for a UX design decision.",
+                "What is your approach to designing for accessibility?",
+                "How do you collaborate with developers during the design process?",
+                "Describe your experience with creating user personas.",
+                "What metrics do you use to measure the success of a UX design?",
+                "How do you handle design criticism?",
+                "What’s your experience with prototyping tools?",
+                "Describe a challenging project and how you managed it.",
+                "How do you ensure your designs are inclusive?",
+                "What role does content play in your UX design process?",
+                "Explain your approach to mobile-first design.",
+                "How do you handle tight deadlines in UX design?",
+                "Describe your process for conducting user interviews.",
+                "What are the biggest challenges in UX design today?",
+                "How do you validate your design decisions?",
+                "Tell me about a time you designed for a specific target audience.",
+                "What is your approach to design documentation?",
+                "How do you incorporate data-driven insights into your designs?",
+                "What’s your experience with responsive design?",
+                "Explain the significance of empathy in UX design."
+            ],
+            "Data Analytics": [
+                "How do you approach data cleaning in a new project?",
+                "Can you describe a time you found an insight that others missed?",
+                "What tools do you use for data visualization?",
+                "How do you ensure data accuracy in your analysis?",
+                "Describe your experience with SQL.",
+                "What’s your process for analyzing large datasets?",
+                "How do you prioritize data tasks in a time-sensitive project?",
+                "Can you explain a complex data concept to a non-technical audience?",
+                "What’s your experience with machine learning in data analytics?",
+                "Describe a project where your analysis impacted decision-making.",
+                "How do you stay current with data analytics trends?",
+                "Explain your process for data validation.",
+                "How do you handle missing or incomplete data?",
+                "What’s your experience with predictive analytics?",
+                "Describe a time you had to communicate a difficult finding.",
+                "How do you integrate data from multiple sources?",
+                "What’s your approach to exploratory data analysis?",
+                "Explain your experience with data-driven decision-making.",
+                "What challenges do you face when working with big data?",
+                "Describe a time you optimized a data process.",
+                "How do you ensure your analysis is unbiased?",
+                "Explain your experience with statistical modeling.",
+                "What’s your approach to hypothesis testing in data analysis?",
+                "How do you tailor your analysis to meet business needs?",
+                "Describe a project where you used advanced analytics techniques.",
+                "How do you ensure your analysis is reproducible?",
+                "What’s your experience with A/B testing?",
+                "Explain your approach to data storytelling.",
+                "How do you handle real-time data processing?",
+                "Describe your experience with cloud-based analytics."
+            ],
+            "Project Management": [
+                "Describe your experience with managing a team.",
+                "How do you handle project risks?",
+                "Can you give an example of how you resolved a project conflict?",
+                "What’s your process for project planning?",
+                "How do you ensure project deadlines are met?",
+                "Describe a time you had to manage a difficult stakeholder.",
+                "How do you handle changes in project scope?",
+                "What’s your experience with Agile project management?",
+                "Explain how you manage project budgets.",
+                "How do you prioritize tasks in a project?",
+                "Describe a time you had to recover a failing project.",
+                "What’s your approach to project documentation?",
+                "How do you ensure effective communication within a project team?",
+                "Explain your experience with project management tools.",
+                "Describe a time you managed a cross-functional team.",
+                "How do you handle project deadlines under pressure?",
+                "What’s your approach to quality management in a project?",
+                "Explain how you handle resource allocation in projects.",
+                "Describe a time you implemented a process improvement in a project.",
+                "How do you manage stakeholder expectations?",
+                "What’s your experience with project risk management?",
+                "Describe a time you managed a remote project team.",
+                "How do you ensure project goals align with business objectives?",
+                "Explain your experience with vendor management in projects.",
+                "Describe a project where you had to manage multiple priorities.",
+                "How do you handle project deliverable sign-offs?",
+                "What’s your experience with project post-mortems?",
+                "Explain your approach to continuous improvement in projects.",
+                "How do you manage team performance in a project?",
+                "Describe your experience with project management software."
+            ]
+        };
+
+        const feedbackMessages = [
+            "Great job! You've covered the key aspects.",
+            "Try to be more specific about your experience.",
+            "Consider adding examples to support your points."
+        ];
+
+        let recognition;
+        let isRecording = false;
+        let currentQuestions = [];
+        let questionIndex = 0;
+
+        function initQuestions() {
+            const jobRole = document.getElementById('jobRole').value;
+            currentQuestions = shuffleArray(questionBank[jobRole]).slice(0, 5);
+            questionIndex = 0;
+            nextQuestion();
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function nextQuestion() {
+            if (questionIndex < currentQuestions.length) {
+                const question = currentQuestions[questionIndex];
+                document.getElementById('questionText').innerText = question;
+                questionIndex++;
+                speakQuestion(question);
+            } else {
+                document.getElementById('questionText').innerText = "No more questions. Well done!";
+            }
+        }
+
+        function speakQuestion(text) {
+            const speech = new SpeechSynthesisUtterance(text);
+            speech.lang = 'en-US';
+            window.speechSynthesis.speak(speech);
+        }
+
+        function startRecording() {
+    if (!isRecording) {
+        recognition = new webkitSpeechRecognition();
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+        recognition.continuous = true; // Enables continuous recognition
+
+        recognition.onresult = function(event) {
+            const speechResult = event.results[0][0].transcript;
+            document.getElementById('answerText').innerText = speechResult;
+        };
+
+        recognition.onend = function() {
+            isRecording = false;
+            toggleRecordButtons();
+        };
+
+        recognition.onerror = function(event) {
+            console.error(event.error);
+            isRecording = false;
+            toggleRecordButtons();
+        };
+
+        recognition.start();
+        isRecording = true;
+        toggleRecordButtons();
+    }
+}
+
+
+        function stopRecording() {
+            if (isRecording) {
+                recognition.stop();
+                isRecording = false;
+                toggleRecordButtons();
+            }
+        }
+
+        function toggleRecordButtons() {
+            document.getElementById('startRecord').style.display = isRecording ? 'none' : 'inline-block';
+            document.getElementById('stopRecord').style.display = isRecording ? 'inline-block' : 'none';
+        }
+
+        function submitAnswer() {
+            const feedback = feedbackMessages[Math.floor(Math.random() * feedbackMessages.length)];
+            document.getElementById('feedback').innerText = feedback;
+        }
+
+        window.onload = initQuestions;
+    </script>
+</body>
+</html>

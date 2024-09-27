@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech to Text with Web Speech API</title>
+</head>
+<body>
+
+<h1>Speech to Text with Web Speech API</h1>
+<button id="start-btn">Start Recognition</button>
+<p id="transcription">Your transcribed text will appear here...</p>
+<p id="response">The response will be shown here...</p>
+
+<script>
+    const startBtn = document.getElementById('start-btn');
+    const transcriptionElement = document.getElementById('transcription');
+    const responseElement = document.getElementById('response');
+
+    startBtn.addEventListener('click', () => {
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        recognition.onresult = (event) => {
+            const transcription = event.results[0][0].transcript;
+            transcriptionElement.textContent = transcription;
+
+            // Send the transcription to the Gradio backend
+            fetch('http://127.0.0.1:7860/api/predict/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ data: [transcription] }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                const responseText = data.data[2];
+                responseElement.textContent = responseText;
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        };
+
+        recognition.start();
+    });
+</script>
+
+</body>
+</html>
