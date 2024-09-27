@@ -16,6 +16,8 @@ Imagine this: You’re standing at the crossroads of your professional life, uns
 
 ## **What Am I All About?**
 
+For a detailed overview of the project, you can access the full demonstration video [here](https://drive.google.com/file/d/1M1RZXYvHDM70iD70NmlBXn8BN5sgb3qG/view?usp=sharing).
+
 I am no ordinary career bot. I am designed to provide a seamless, personalized career guidance experience through **AI-driven insights, mock interviews, and real-time learning recommendations**. Here’s a breakdown of what I can do for you:
 
 ### **1. Personalized Career Guidance**🎯
@@ -44,18 +46,25 @@ We’ve designed **Course Compass** to be your personal navigator in the vast oc
 - **Web Scraping Magic**: It uses BeautifulSoup to fetch the most relevant courses for you.
 - **Content-Based Filtering**: Like a compass guiding you north, we employ a filtering algorithm to recommend similar courses that match your interests.
 - **Cosine Similarity**: How similar are two courses? We compute that using a mathematical measure, ensuring every recommendation is on point!
+![cont](https://github.com/user-attachments/assets/8e633a55-83ac-4516-8b3d-59fda0ab8086)
+
 
 ### 2. 🧠 **Aptitude Ace: Aptitude Testing Platform**
 Wondering how sharp your skills are? **Aptitude Ace** is here to test your mettle with quizzes on:
 - **Maths**, **Probability**, and **Vocabulary**: Classic aptitude topics.
 - **Time and Work**: We even dive into how you manage time!
 These questions prepare you for anything from competitive exams to job interviews.
+![qwe](https://github.com/user-attachments/assets/09ac1dc2-41bb-458e-8cea-a2b03cdfb56f)
+
 
 ### 3. 🧑‍🎤 **Interview Warmup**
 Inspired by **Google’s Interview Warmup**, this module is built for those who want to **talk the talk**:
 - **Audio-Powered Interview Simulation**: You get to practice interview questions with real-time audio feedback.
 - **Situational & Critical Thinking**: It’s not just the basics; you’ll be answering critical thinking and situational-based questions.
 - **Answer Analysis**: All your answers are stored for further analysis, helping you track improvement over time.
+
+![war](https://github.com/user-attachments/assets/0653aa18-d2d4-42d8-b0e4-a77707fa9c71)
+
 
 ### 4. 🤯 **Personality Test (Fun Element)**
 A little self-reflection goes a long way! The **Personality Test** uses the **Myers-Briggs Type Indicator (MBTI)** to categorize your personality traits and map them to potential career paths. It’s not just about jobs, it’s about finding what fits **you**!
@@ -70,6 +79,8 @@ The job market is more competitive than ever, and the traditional methods of car
 
 ### **1. Beyond Resumes**
    Most career systems, like *Jobscan*, focus only on resumes. But I go further—helping you prepare for interviews, analyze your documents, and even offer language support.
+   ![docu](https://github.com/user-attachments/assets/884e7ed9-b9d7-4319-890e-6660999fa9d0)
+
 
 ### **2. Interview Bot with Realistic Feedback**
    Say goodbye to standard interview prep! I simulate domain-specific interviews and provide **audio-based feedback** to help you improve. My scoring system even compares your answers to ideal responses, ensuring you're on the right track.
@@ -89,8 +100,13 @@ Here’s a deeper look at what I bring to the table:
 ### **Career-Specific Chatbot**
    Ask me anything career-related! From exploring job opportunities to advice on skills development, my chatbot module provides tailored solutions.
 
+   ![dsfsd](https://github.com/user-attachments/assets/e17d6d88-fd28-4c21-a474-86bd669ecbc1)
+
+
 ### **Language Learning Support**
    Want to learn a new language? I’ll guide you step-by-step, providing translation and practice opportunities so you can build your communication skills for the global job market.
+   ![lag](https://github.com/user-attachments/assets/21c254b6-04fd-4c50-ab1b-a390c0391e88)
+
 
 ### **Interview Preparation**
    My **Interview Bot** asks you questions based on your domain expertise and simulates real-time conversations. You’ll receive feedback on your answers, boosting your confidence and skills.
@@ -99,7 +115,9 @@ Here’s a deeper look at what I bring to the table:
    I recommend the best resources for your learning, from research papers to online courses, ensuring you’re always up-to-date in your field.
 
 ### ** User dashboard**
-    I will provide a dashboard that highlights the performance of the users in the interviews, warmup sessions, etc.
+ I will provide a dashboard that highlights the performance of the users in the interviews, warmup sessions, etc.
+ ![image](https://github.com/user-attachments/assets/db983469-0f8f-43f5-8215-521340191428)
+
 ---
 
 ## **How Does It All Work?**
@@ -145,14 +163,18 @@ While I’m already equipped to help you ace your career journey, here’s what�
 - **Speech-Based Interviews**: I’m working on enhancing my interview bot with **speech capabilities** for a fully immersive experience.
 - **Expanded Course Recommendations**: Expect more tailored learning opportunities as I continue to grow my knowledge base.
 
-# Report 
+## Report 
 
-Find our report here : https://drive.google.com/file/d/1aiKSewtR3wimCefeQiNNXZMGKoYqRzQL/view?usp=drive_link
+Find our report here : [here](https://drive.google.com/file/d/1aiKSewtR3wimCefeQiNNXZMGKoYqRzQL/view?usp=drive_link)
+
+Presentation : [here](https://drive.google.com/drive/folders/1B3yg-lTGZ1ZNl0W_Ku4qof7ReoceABmQ)
+
 ---
 
 Let’s begin our journey together, shall we? Conversations will guide us to your career success, one chat at a time. 💬🚀
 
 ---
+
 
 > _"Success starts with the right conversation."_
 
