@@ -13,10 +13,11 @@
 Imagine this: You’re standing at the crossroads of your professional life, unsure which path to take. That’s where I come in! My name, *Colloquium*, comes from the Latin word for *conversations*, and that’s precisely what we’ll be having—productive, insightful conversations that will help guide you to your dream career.
 
 ---
+# For a detailed overview of the project, you can access the full demonstration video [here](https://drive.google.com/file/d/1M1RZXYvHDM70iD70NmlBXn8BN5sgb3qG/view?usp=sharing).
+
 
 ## **What Am I All About?**
 
-For a detailed overview of the project, you can access the full demonstration video [here](https://drive.google.com/file/d/1M1RZXYvHDM70iD70NmlBXn8BN5sgb3qG/view?usp=sharing).
 
 I am no ordinary career bot. I am designed to provide a seamless, personalized career guidance experience through **AI-driven insights, mock interviews, and real-time learning recommendations**. Here’s a breakdown of what I can do for you:
 
@@ -114,7 +115,7 @@ Here’s a deeper look at what I bring to the table:
 ### **Material Recommendations**
    I recommend the best resources for your learning, from research papers to online courses, ensuring you’re always up-to-date in your field.
 
-### ** User dashboard**
+### **User dashboard**
  I will provide a dashboard that highlights the performance of the users in the interviews, warmup sessions, etc.
  ![image](https://github.com/user-attachments/assets/db983469-0f8f-43f5-8215-521340191428)
 
