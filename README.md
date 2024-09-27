@@ -1,8 +1,6 @@
-Here’s an expanded version of the GitHub README file for your project, using the details from the report and keeping the perspective of *Colloquium* as the Career Bot. It introduces the project in a unique, conversational way, making it engaging for the readers:
 
----
 
-# **Welcome to Colloquium: Your AI-Powered Career Guide**
+# **Welcome to Colloquium: Your AI-Powered Career Guide** 🤖
 
 ---
 
