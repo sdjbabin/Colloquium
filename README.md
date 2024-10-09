@@ -97,23 +97,23 @@ Here’s a deeper look at what I bring to the table:
 
 ### **Document Summarizer**
    Need a quick summary of your resume or academic document? Upload it, and I’ll summarize key points, saving you the hassle of manual review.
-   link: ![here](https://huggingface.co/spaces/WebTrio24/All_in_one_summariser)
+   link: [here](https://huggingface.co/spaces/WebTrio24/All_in_one_summariser)
 
 ### **Career-Specific Chatbot**
    Ask me anything career-related! From exploring job opportunities to advice on skills development, my chatbot module provides tailored solutions.
-   link: ![here](https://huggingface.co/spaces/WebTrio24/chatbot)
+   link: [here](https://huggingface.co/spaces/WebTrio24/chatbot)
    ![dsfsd](https://github.com/user-attachments/assets/e17d6d88-fd28-4c21-a474-86bd669ecbc1)
 
 
 ### **Language Learning Support**
    Want to learn a new language? I’ll guide you step-by-step, providing translation and practice opportunities so you can build your communication skills for the global job market.
-   link: ![here](https://huggingface.co/spaces/WebTrio24/multilingual)
+   link: [here](https://huggingface.co/spaces/WebTrio24/multilingual)
    ![lag](https://github.com/user-attachments/assets/21c254b6-04fd-4c50-ab1b-a390c0391e88)
 
 
 ### **Interview Preparation**
    My **Interview Bot** asks you questions based on your domain expertise and simulates real-time conversations. You’ll receive feedback on your answers, boosting your confidence and skills.
-   link: ![here](https://huggingface.co/spaces/WebTrio24/interview_simulator)
+   link: [here](https://huggingface.co/spaces/WebTrio24/interview_simulator)
 
 ### **Material Recommendations**
    I recommend the best resources for your learning, from research papers to online courses, ensuring you’re always up-to-date in your field.
