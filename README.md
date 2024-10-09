@@ -30,7 +30,7 @@ I am no ordinary career bot. I am designed to provide a seamless, personalized c
 ### **3. Research Paper & Course Recommendations** 📚
    - I help you stay updated with the latest research and learning opportunities. Whether you’re a student or a professional, my machine learning algorithms will suggest relevant research papers and online courses to sharpen your skills.
 
-### **4. Language Learning Support 🌍🗣️
+### **4. Language Learning Support** 🌍🗣️
 Want to learn a new language? I’ll guide you step-by-step, providing translation and practice opportunities so you can build your communication skills for the global job market.
 
 ### **5. Multimodal Chat Support** 💬🗣️
@@ -97,6 +97,7 @@ Here’s a deeper look at what I bring to the table:
 
 ### **Document Summarizer**
    Need a quick summary of your resume or academic document? Upload it, and I’ll summarize key points, saving you the hassle of manual review.
+   link: ![dsfsd](https://huggingface.co/spaces/WebTrio24/All_in_one_summariser)
 
 ### **Career-Specific Chatbot**
    Ask me anything career-related! From exploring job opportunities to advice on skills development, my chatbot module provides tailored solutions.
